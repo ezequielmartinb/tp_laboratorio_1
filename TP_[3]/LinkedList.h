@@ -34,22 +34,22 @@ struct LinkedList
 
 
 //Publicas
-LinkedList* ll_newLinkedList(void);
-int ll_len(LinkedList* this);
+LinkedList* ll_newLinkedList(void);// CONSTRUCTOR. CREA LA LISTA EN EL HEAP
+int ll_len(LinkedList* this);//CUENTA LA CANTIDAD DE ELEMENTOS QUE TENGO DENTRO DE LA LISTA
 Node* test_getNode(LinkedList* this, int nodeIndex);
 int test_addNode(LinkedList* this, int nodeIndex,void* pElement);
-int ll_add(LinkedList* this, void* pElement);
-void* ll_get(LinkedList* this, int index);
-int ll_set(LinkedList* this, int index,void* pElement);
-int ll_remove(LinkedList* this,int index);
-int ll_clear(LinkedList* this);
-int ll_deleteLinkedList(LinkedList* this);
-int ll_indexOf(LinkedList* this, void* pElement);
-int ll_isEmpty(LinkedList* this);
-int ll_push(LinkedList* this, int index, void* pElement);
-void* ll_pop(LinkedList* this,int index);
-int ll_contains(LinkedList* this, void* pElement);
-int ll_containsAll(LinkedList* this,LinkedList* this2);
-LinkedList* ll_subList(LinkedList* this,int from,int to);
-LinkedList* ll_clone(LinkedList* this);
-int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order);
+int ll_add(LinkedList* this, void* pElement);//AGREGA ELEMENTOS A LA LISTA
+void* ll_get(LinkedList* this, int index);//DEVUELVE UN DATO DENTRO DE LA LISTA
+int ll_set(LinkedList* this, int index,void* pElement);//REEMPLAZA UN ELEMENTO CON OTRO
+int ll_remove(LinkedList* this,int index);//REMUEVE UN ELEMENTO DEL INDICE ESPECIFICADO
+int ll_clear(LinkedList* this);//LIMPIA TODA LA LISTA, SIN BORRAR EL LINKED LIST
+int ll_deleteLinkedList(LinkedList* this);//BORRAR EL LINKED LISTA. SERIA EL "DESTRUCTOR"
+int ll_indexOf(LinkedList* this, void* pElement);//BUSCAR EL INDICE DE UN ELEMENTO ESPECIFICO
+int ll_isEmpty(LinkedList* this);//INDICA SI EL LINKED LIST ESTA VACIO O NO
+int ll_push(LinkedList* this, int index, void* pElement);//AGREGA UN ELEMENTO EN EL INDICE ESPECIFICADO
+void* ll_pop(LinkedList* this,int index);//DEVUELVE EL ELEMENTO QUE SACÓ DE LA LISTA
+int ll_contains(LinkedList* this, void* pElement);//SI EXISTE UN ELEMENTO X DENTRO DE LA LISTA
+int ll_containsAll(LinkedList* this,LinkedList* this2);//VERIFICA SI UNA LISTA ESTA DENTRO DE OTRA LISTA
+LinkedList* ll_subList(LinkedList* this,int from,int to);//TE HACE UNA LISTA DESDE UN INDICE HASTA EL OTRO INDICE
+LinkedList* ll_clone(LinkedList* this);//CLONA TODA UNA LISTA (LLAMA A SUBLIST Y VA DESDE EL PRIMER INDICE HASTA EL ULTIMO)
+int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order);//ORDENA LA LISTA

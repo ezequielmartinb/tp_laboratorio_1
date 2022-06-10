@@ -24,13 +24,12 @@
 int main()
 {
     int opcionIngresada;
-    LinkedList* listaPasajeros = ll_newLinkedList();
-
+    LinkedList* listaPasajeros=ll_newLinkedList();
     setbuf(stdout, NULL);
 
     while(opcionIngresada!=10)
 	{
-		printf("\t***MENU DE OPCIONES***\n\n");
+		printf("\t**********************MENU DE OPCIONES**********************\n\n");
 		printf("1- Cargar los datos de los pasajeros desde el archivo data.csv (modo texto).\n"
 			   "2- Cargar los datos de los pasajeros desde el archivo data.csv (modo binario).\n"
 			   "3- Alta de pasajero\n"
@@ -46,23 +45,43 @@ int main()
 			switch(opcionIngresada)
 			{
 				case 1:
-					printf("ACA VA LA CARGA DE DATOS TEXTO\n");
-					controller_loadFromText("data.csv",listaPasajeros);
+					if(controller_loadFromText("data.csv",listaPasajeros)!=-1)
+					{
+						printf("\n\n\n**********************LA CARGA DE DATOS SE REALIZO CON EXITO**********************\n\n\n");
+					}
+
 					break;
 				case 2:
 					printf("ACA VA LA CARGA DE DATOS BINARIA\n");
 					break;
 				case 3:
-					printf("ACA VA LA ALTA\n");
+					if(controller_addPassenger(listaPasajeros)==0)
+					{
+						printf("\n\n\n**********************ALTA EXITOSA**********************\n\n\n");
+					}
+					else
+					{
+						printf("\n\n\n**********************ALTA DENEGADA**********************\n\n\n");
+					}
 					break;
 				case 4:
 					printf("ACA VA LA MODIFICACION\n");
 					break;
 				case 5:
-					printf("ACA VA LA BAJA\n");
+					if(controller_removePassenger(listaPasajeros)!=-1)
+					{
+						printf("\n\n\n**********************BAJA EXITOSA**********************\n\n\n");
+					}
+					else
+					{
+						printf("\n\n\n**********************BAJA DENEGADA**********************\n\n\n");
+					}
 					break;
 				case 6:
-					printf("ACA VA EL LISTAR\n");
+					if(controller_ListPassenger(listaPasajeros)!=0)
+					{
+						printf("\n\n\n**********************LA LISTA NO SE MOSTRO CON EXITO**********************\n\n\n");
+					}
 					break;
 				case 7:
 					printf("ACA VA EL ORDENAR\n");

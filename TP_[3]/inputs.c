@@ -16,17 +16,17 @@ int utn_getString(char cadena[], int len, char mensaje[], char mensajeError[], i
 		while(reintentos>0)
 		{
 			printf("%s", mensaje);
-			if(utn_myGets(auxiliar, 256)==0 && utn_validarSiSonLetras(auxiliar)==1 && utn_validarSiEsNumerico(auxiliar)==0)
+			if(utn_myGets(auxiliar, 256)==0)
 			{
 				retorno=0;
 				strncpy(cadena, auxiliar, len);
-				printf("La cadena se copio con exito\n");
+				//printf("La cadena se copio con exito\n");
 				break;
 			}
 			else
 			{
 				retorno=-1;
-				printf("No se pudo copiar la cadena\n");
+				//printf("No se pudo copiar la cadena\n");
 			}
 			printf("%s. ", mensajeError);
 			printf("Cantidad de reintentos: %d\n", reintentos);
@@ -228,13 +228,13 @@ int utn_getNombre(char cadena[], int len, char mensaje[], char mensajeError[], i
 				retorno=0;
 
 				strncpy(cadena, auxiliar, len);
-				printf("El nombre se copio con exito\n");
+				//printf("El nombre se copio con exito\n");
 				break;
 			}
 			else
 			{
 				retorno=-1;
-				printf("No se pudo copiar el nombre\n");
+				//printf("No se pudo copiar el nombre\n");
 			}
 			printf("%s. ", mensajeError);
 			printf("Cantidad de reintentos: %d\n", reintentos);
