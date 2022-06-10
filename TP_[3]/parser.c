@@ -23,7 +23,11 @@ int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger, char
 	char codigoDeVueloAuxiliar[50];
 	char estadoDeVueloAuxiliar[50];
 
-	pFile=fopen(path, "r");
+	if(path!=NULL)
+	{
+		pFile=fopen(path, "r");
+	}
+
 	if(pFile!=NULL)
 	{
 		fscanf(pFile,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n",idAuxiliar,nombreAuxiliar,apellidoAuxiliar,precioAuxiliar, tipoPasajeroAuxiliar, codigoDeVueloAuxiliar, estadoDeVueloAuxiliar);// falsa lectura
