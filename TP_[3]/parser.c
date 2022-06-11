@@ -89,15 +89,13 @@ int parser_PassengerFromBinary(FILE* pFile , LinkedList* pArrayListPassenger, ch
 
 			if(cantidad==1 && auxiliarPasajeros!=NULL)
 			{
-				if(
-				   Passenger_getId(auxiliarPasajeros,&auxiliarId)==0 &&
+				if(Passenger_getId(auxiliarPasajeros,&auxiliarId)==0 &&
 				   Passenger_getNombre(auxiliarPasajeros,auxiliarNombre)==0 &&
 				   Passenger_getApellido(auxiliarPasajeros, auxiliarApellido)==0 &&
 				   Passenger_getPrecio(auxiliarPasajeros, &auxiliarPrecio)==0 &&
 				   Passenger_getCodigoVuelo(auxiliarPasajeros, auxiliarCodigoVuelo)==0 &&
 				   Passenger_getTipoPasajero(auxiliarPasajeros, auxiliarTipoPasajero)==0 &&
-				   Passenger_getEstadoVuelo(auxiliarPasajeros, auxiliarEstadoVuelo)==0
-					)
+				   Passenger_getEstadoVuelo(auxiliarPasajeros, auxiliarEstadoVuelo)==0)
 				{
 					 ll_add(pArrayListPassenger,auxiliarPasajeros);
 					 retorno=0;

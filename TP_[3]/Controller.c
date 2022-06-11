@@ -46,7 +46,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger)
 int controller_lastID(LinkedList* pArrayListPassenger)
 {
 	Passenger* auxiliarPasajeros;
-	int id;
+	int id=0;
 	int len;
 	len=ll_len(pArrayListPassenger);
 
@@ -87,6 +87,7 @@ int controller_addPassenger(LinkedList* pArrayListPassenger)
 	{
 		nuevoPasajero=Passenger_new();
 		id=controller_lastID(pArrayListPassenger);
+		id++;
 		if(utn_getNombre(nombre, 50, "Ingrese el nombre del pasajero: ", "ERROR. NOMBRE INVALIDO. ", 3)==0 &&
 		   utn_getNombre(apellido, 50, "Ingrese el apellido del pasajero: ", "ERROR. APELLIDO INVALIDO. ", 3)==0 &&
 		   utn_getNumeroFlotante(&precio, "Ingrese el precio: ", "ERROR. PRECIO INVALIDO. ", 1, 3000000, 3)==0 &&
@@ -121,7 +122,7 @@ int controller_addPassenger(LinkedList* pArrayListPassenger)
 						break;
 				}
 				nuevoPasajero=Passenger_newParametrosCorrectos(id, nombre, apellido, precio, codigoDeVuelo, auxiliarTipoPasajero, auxiliarEstadoVuelo);
-				Passenger_showOnePassenger(nuevoPasajero);
+				//Passenger_showOnePassenger(nuevoPasajero);
 				ll_add(pArrayListPassenger, nuevoPasajero);
 				retorno=0;
 			}
@@ -323,7 +324,54 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger)
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListPassenger)
 {
-    return 1;
+	int retorno=-1;// ERROR AL ABRIR EL ARCHIVO
+	FILE* pArchivo;
+	Passenger* auxiliarPasajero=NULL;
+
+	int auxiliarId;
+	char auxiliarNombre[50];
+	char auxiliarApellido[50];
+	float auxiliarPrecio;
+	char auxiliarCodigoVuelo[50];
+	char auxiliarTipoPasajero[50];
+	char auxiliarEstadoVuelo[50];
+
+	char opcion;
+	int len;
+	int cantidad;
+
+	if(path!=NULL && pArrayListPassenger!=NULL)
+	{
+		if(utn_getUnCaracter(&opcion, "\nEsta accion sobreescribira los archivos. Desea sobreescribir los archivos? Y/N\n", "ERROR. OPCION INVALIDA", 'A', 'Z', 3)==0 && opcion=='Y')
+		{
+			pArchivo=fopen(path,"w");
+			len=ll_len(pArrayListPassenger);
+			fprintf(pArchivo, "id,name,lastname,price,flycode,typePassenger,statusFlight\n");
+			for(int i=0;i<len;i++)
+			{
+				auxiliarPasajero=(Passenger*) ll_get(pArrayListPassenger, i);
+				if(auxiliarPasajero!=NULL)
+				{
+					if(Passenger_getId(auxiliarPasajero, &auxiliarId)==0 &&	Passenger_getNombre(auxiliarPasajero, auxiliarNombre)==0 &&
+					Passenger_getApellido(auxiliarPasajero, auxiliarApellido)==0 && Passenger_getPrecio(auxiliarPasajero, &auxiliarPrecio)==0 &&
+					Passenger_getCodigoVuelo(auxiliarPasajero, auxiliarCodigoVuelo)==0 && Passenger_getTipoPasajero(auxiliarPasajero, auxiliarTipoPasajero)==0 &&
+					Passenger_getEstadoVuelo(auxiliarPasajero, auxiliarEstadoVuelo)==0)
+					{
+						cantidad=fprintf(pArchivo,"%d,%s,%s,%.2f,%s,%s,%s\n", auxiliarId, auxiliarNombre, auxiliarApellido,auxiliarPrecio,auxiliarCodigoVuelo,auxiliarTipoPasajero,auxiliarEstadoVuelo);
+						retorno=0;// LOS DATOS FUERON GUARDADOS CON EXITO
+					}
+				}
+				if(cantidad<7)
+				{
+					retorno=1;// ERROR AL GUARDAR LOS ARCHIVOS
+					break;
+				}
+			}
+			fclose(pArchivo);
+		}
+	}
+
+    return retorno;
 }
 
 /** \brief Guarda los datos de los pasajeros en el archivo data.csv (modo binario).
@@ -333,6 +381,37 @@ int controller_saveAsText(char* path , LinkedList* pArrayListPassenger)
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger)
 {
-    return 1;
+	int retorno=-1;// ERROR AL ABRIR EL ARCHIVO
+	FILE* pArchivo;
+	Passenger* auxiliarPasajeros=NULL;
+	char opcion;
+	int len;
+	int cantidad;
+
+	if(path!=NULL && pArrayListPassenger!=NULL)
+	{
+
+		if(utn_getUnCaracter(&opcion, "\nEsta accion sobreescribira los archivos. Desea sobreescribir los archivos? Y/N\n", "ERROR. OPCION INVALIDA", 'A', 'Z', 3)==0 && opcion=='Y')
+		{
+			pArchivo=fopen(path,"wb");
+			len=ll_len(pArrayListPassenger);
+			for(int i=0;i<len;i++)
+			{
+				auxiliarPasajeros=(Passenger*) ll_get(pArrayListPassenger, i);
+				if(auxiliarPasajeros!=NULL)
+				{
+					cantidad=fwrite(auxiliarPasajeros,sizeof(Passenger),1,pArchivo);
+					retorno=0;// LOS DATOS SE GUARDARON CON EXITO
+				}
+				if(cantidad<1)
+				{
+					retorno=1;// ERROR AL GUARDAR LOS ARCHIVOS
+					break;
+				}
+			}
+			fclose(pArchivo);
+		}
+	}
+	return retorno;
 }
 

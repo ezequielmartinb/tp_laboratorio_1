@@ -390,13 +390,12 @@ int Passenger_modifyPassenger(Passenger* this, int index, int id, int opcion)
 	int nuevoTipoPasajero;
 	char auxiliarNuevoEstadoVuelo[50];
 	int nuevoEstadoVuelo;
-	printf("La opcion en passenger modify es: %d\n", opcion);
+
 	if (this!=NULL && index>0)
 	{
 		switch(opcion)
 		{
 			case 1:
-				printf("La opcion en passenger modify es: %d\n", opcion);
 				if (utn_getNombre(nuevoNombre, 50, "Ingrese el nuevo nombre: ", "ERROR. NOMBRE INVALIDO", 3)==0)
 				{
 					Passenger_setNombre(this, nuevoNombre);
@@ -471,7 +470,7 @@ int Passenger_compareByID(void* unPasajero, void* otroPasajero)
 	int retorno;
 	int auxiliarIDUno;
 	int auxiliarIDDos;
-	retorno = 0;
+	retorno=0;
 
 	if(unPasajero!=NULL && otroPasajero!=NULL)
 	{
@@ -482,7 +481,7 @@ int Passenger_compareByID(void* unPasajero, void* otroPasajero)
 		{
 			retorno=1;
 		}
-		else if(auxiliarIDUno>auxiliarIDDos)
+		else if(auxiliarIDUno<auxiliarIDDos)
 		{
 			retorno=-1;
 		}
@@ -528,7 +527,7 @@ int Passenger_compareByPrecio(void* unPasajero, void* otroPasajero)
 	int retorno;
 	float auxiliarPrecioUno;
 	float auxiliarPrecioDos;
-	retorno = 0;
+	retorno=0;
 
 	if(unPasajero!=NULL && otroPasajero!=NULL)
 	{
@@ -539,7 +538,7 @@ int Passenger_compareByPrecio(void* unPasajero, void* otroPasajero)
 		{
 			retorno=1;
 		}
-		else if(auxiliarPrecioDos>auxiliarPrecioUno)
+		else if(auxiliarPrecioUno<auxiliarPrecioDos)
 		{
 			retorno=-1;
 		}

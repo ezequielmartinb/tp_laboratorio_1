@@ -25,6 +25,11 @@ int main()
 {
     LinkedList* listaPasajeros=ll_newLinkedList();
     int opcionIngresada;
+    int banderaGuardarDeDatosTxt;
+    int banderaGuardarDeDatosBin;
+
+    banderaGuardarDeDatosTxt=1;
+    banderaGuardarDeDatosBin=1;
     setbuf(stdout, NULL);
 
     while(opcionIngresada!=10)
@@ -45,15 +50,29 @@ int main()
 			switch(opcionIngresada)
 			{
 				case 1:
-					if(controller_loadFromText("data.csv",listaPasajeros)!=-1)
+					if(banderaGuardarDeDatosTxt==1)
 					{
-						printf("\n\n\n**********************LA CARGA DE DATOS EN TEXTO SE REALIZO CON EXITO**********************\n\n\n");
+						printf("\n\n\n**********************ANTES DE CARGAR LOS ARCHIVOS EN TEXTO, PRIMERO HAY QUE GUARDAR**********************\n\n\n");
+					}
+					else
+					{
+						if(controller_loadFromText("data.csv",listaPasajeros)!=-1)
+						{
+							printf("\n\n\n**********************LA CARGA DE DATOS EN TEXTO SE REALIZO CON EXITO**********************\n\n\n");
+						}
 					}
 					break;
 				case 2:
-					if(controller_loadFromBinary("data.bin",listaPasajeros)!=-1)
+					if(banderaGuardarDeDatosBin==1)
 					{
-						printf("\n\n\n**********************LA CARGA DE DATOS EN BINARIO SE REALIZO CON EXITO**********************\n\n\n");
+						printf("\n\n\n**********************ANTES DE CARGAR LOS ARCHIVOS BINARIO, PRIMERO HAY QUE GUARDAR**********************\n\n\n");
+					}
+					else
+					{
+						if(controller_loadFromBinary("data.bin",listaPasajeros)!=-1)
+						{
+							printf("\n\n\n**********************LA CARGA DE DATOS EN BINARIO SE REALIZO CON EXITO**********************\n\n\n");
+						}
 					}
 					break;
 				case 3:
@@ -104,10 +123,34 @@ int main()
 					}
 					break;
 				case 8:
-					printf("ACA VA GUARDAR LOS DATOS EN MODO TEXTO\n");
+					if(controller_saveAsText("data.csv", listaPasajeros)==0)
+					{
+						banderaGuardarDeDatosTxt=0;
+						printf("\n\n\n**********************LOS DATOS DE LA LISTA FUERON GUARDADOS CON EXITO**********************\n\n\n");
+					}
+					else if(controller_saveAsText("data.csv", listaPasajeros)==1)
+					{
+						printf("\n\n\n**********************ERROR AL GUARDAR LOS DATOS DE LA LISTA**********************\n\n\n");
+					}
+					else
+					{
+						printf("\n\n\n**********************ERROR AL ABRIR LOS DATOS DE LA LISTA**********************\n\n\n");
+					}
 					break;
 				case 9:
-					printf("ACA VA GUARDAR LOS DATOS EN MODO BINARIO\n");
+					if(controller_saveAsBinary("data.bin", listaPasajeros)==0)
+					{
+						banderaGuardarDeDatosBin=0;
+						printf("\n\n\n**********************LOS DATOS DE LA LISTA FUERON GUARDADOS CON EXITO**********************\n\n\n");
+					}
+					else if(controller_saveAsBinary("data.bin", listaPasajeros)==1)
+					{
+						printf("\n\n\n**********************ERROR AL GUARDAR LOS DATOS DE LA LISTA**********************\n\n\n");
+					}
+					else
+					{
+						printf("\n\n\n**********************ERROR AL ABRIR LOS DATOS DE LA LISTA**********************\n\n\n");
+					}
 					break;
 				case 10:
 					printf("\n\n\n**********************GRACIAS POR UTILIZAR LA APP UTN LINKEDLIST**********************\n\n\n\n");
