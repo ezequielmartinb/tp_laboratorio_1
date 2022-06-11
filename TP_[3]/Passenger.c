@@ -255,9 +255,9 @@ int Passenger_showOnePassenger(Passenger* this)
 		if(Passenger_getId(this, &idAuxiliar)==0 &&	Passenger_getNombre(this, nombreAuxiliar)==0 &&
 		   Passenger_getApellido(this, apellidoAuxiliar)==0 && Passenger_getPrecio(this, &precioAuxiliar)==0 &&
 		   Passenger_getTipoPasajero(this, tipoPasajeroAuxiliar)==0 &&	Passenger_getCodigoVuelo(this, codigoVueloAuxiliar)==0 &&
-		   Passenger_getEstadoVuelo(this, estadoVuelo)==0)// HACER UNA FUNCION QUE VALIDE SETTERS Y GETTERS
+		   Passenger_getEstadoVuelo(this, estadoVuelo)==0)
 		{
-			printf("|%4d | |%15s | |%15s | |%15.2f | |%15s | |%15s | |%15s |\n",idAuxiliar, nombreAuxiliar,apellidoAuxiliar, precioAuxiliar, tipoPasajeroAuxiliar, codigoVueloAuxiliar, estadoVuelo);
+			printf("|%4d | |%15s | |%15s | |%15.2f | |%15s | |%15s | |%15s |\n",idAuxiliar, nombreAuxiliar, apellidoAuxiliar, precioAuxiliar, tipoPasajeroAuxiliar, codigoVueloAuxiliar, estadoVuelo);
 			retorno=0;
 		}
 
