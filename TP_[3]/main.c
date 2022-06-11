@@ -23,13 +23,13 @@
 
 int main()
 {
-    int opcionIngresada;
     LinkedList* listaPasajeros=ll_newLinkedList();
+    int opcionIngresada;
     setbuf(stdout, NULL);
 
     while(opcionIngresada!=10)
 	{
-		printf("\t**********************MENU DE OPCIONES**********************\n\n");
+		printf("\t**********************BIENVENIDO A LA APP UTN LINKEDLIST**********************\n\n");
 		printf("1- Cargar los datos de los pasajeros desde el archivo data.csv (modo texto).\n"
 			   "2- Cargar los datos de los pasajeros desde el archivo data.csv (modo binario).\n"
 			   "3- Alta de pasajero\n"
@@ -47,12 +47,14 @@ int main()
 				case 1:
 					if(controller_loadFromText("data.csv",listaPasajeros)!=-1)
 					{
-						printf("\n\n\n**********************LA CARGA DE DATOS SE REALIZO CON EXITO**********************\n\n\n");
+						printf("\n\n\n**********************LA CARGA DE DATOS EN TEXTO SE REALIZO CON EXITO**********************\n\n\n");
 					}
-
 					break;
 				case 2:
-					printf("ACA VA LA CARGA DE DATOS BINARIA\n");
+					if(controller_loadFromBinary("data.bin",listaPasajeros)!=-1)
+					{
+						printf("\n\n\n**********************LA CARGA DE DATOS EN BINARIO SE REALIZO CON EXITO**********************\n\n\n");
+					}
 					break;
 				case 3:
 					if(controller_addPassenger(listaPasajeros)==0)
@@ -66,6 +68,14 @@ int main()
 					break;
 				case 4:
 					printf("ACA VA LA MODIFICACION\n");
+					if(controller_editPassenger(listaPasajeros)==0)
+					{
+						printf("\n\n\n**********************MODIFICACION EXITOSA**********************\n\n\n");
+					}
+					else
+					{
+						printf("\n\n\n**********************MODIFICACION DENEGADA**********************\n\n\n");
+					}
 					break;
 				case 5:
 					if(controller_removePassenger(listaPasajeros)!=-1)
@@ -84,7 +94,14 @@ int main()
 					}
 					break;
 				case 7:
-					printf("ACA VA EL ORDENAR\n");
+					if(controller_sortPassenger(listaPasajeros)==0)
+					{
+						printf("\n\n\n**********************LA LISTA SE ORDENO DE FORMA EXITOSA**********************\n\n\n");
+					}
+					else
+					{
+						printf("\n\n\n**********************LA LISTA NO SE ORDENO DE FORMA EXITOSA**********************\n\n\n");
+					}
 					break;
 				case 8:
 					printf("ACA VA GUARDAR LOS DATOS EN MODO TEXTO\n");
@@ -93,10 +110,8 @@ int main()
 					printf("ACA VA GUARDAR LOS DATOS EN MODO BINARIO\n");
 					break;
 				case 10:
-					printf("SALIR\n");
+					printf("\n\n\n**********************GRACIAS POR UTILIZAR LA APP UTN LINKEDLIST**********************\n\n\n\n");
 					break;
-
-
 			}
 		}
 
