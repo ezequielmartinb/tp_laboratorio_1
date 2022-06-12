@@ -31,7 +31,7 @@ int main()
     int banderaCargarDeDatosBin;
     int banderaAlta;
 
-    banderaGuardarDeDatosTxt=1;
+    banderaGuardarDeDatosTxt=0;
     banderaGuardarDeDatosBin=1;
     banderaCargarDeDatosTxt=1;
     banderaCargarDeDatosBin=1;
@@ -96,7 +96,7 @@ int main()
 					}
 					break;
 				case 4:
-					if((banderaCargarDeDatosTxt==1 || banderaCargarDeDatosBin==1) && banderaAlta==1)
+					if((banderaCargarDeDatosTxt==1 && banderaCargarDeDatosBin==1) && banderaAlta==1)
 					{
 						printf("\n\n\n**********************ANTES DE MODIFICAR, PRIMERO HAY QUE DAR DE ALTA O CARGAR LOS ARCHIVOS**********************\n\n\n");
 					}
@@ -111,7 +111,7 @@ int main()
 
 					break;
 				case 5:
-					if((banderaCargarDeDatosTxt==1 || banderaCargarDeDatosBin==1) && banderaAlta==1)
+					if((banderaCargarDeDatosTxt==1 && banderaCargarDeDatosBin==1) && banderaAlta==1)
 					{
 						printf("\n\n\n**********************ANTES DE DAR DE BAJA, PRIMERO HAY QUE DAR DE ALTA O CARGAR LOS ARCHIVOS**********************\n\n\n");
 					}
@@ -125,7 +125,7 @@ int main()
 					}
 					break;
 				case 6:
-					if((banderaCargarDeDatosTxt==1 || banderaCargarDeDatosBin==1) && banderaAlta==1)
+					if(banderaCargarDeDatosTxt==1 && banderaCargarDeDatosBin==1 && banderaAlta==1)
 					{
 						printf("\n\n\n**********************ANTES DE LISTAR, PRIMERO HAY QUE DAR DE ALTA O CARGAR LOS ARCHIVOS**********************\n\n\n");
 					}
@@ -135,7 +135,7 @@ int main()
 					}
 					break;
 				case 7:
-					if((banderaCargarDeDatosTxt==1 || banderaCargarDeDatosBin==1) && banderaAlta==1)
+					if((banderaCargarDeDatosTxt==1 && banderaCargarDeDatosBin==1) && banderaAlta==1)
 					{
 						printf("\n\n\n**********************ANTES DE ORDENAR, PRIMERO HAY QUE DAR DE ALTA O CARGAR LOS ARCHIVOS**********************\n\n\n");
 					}

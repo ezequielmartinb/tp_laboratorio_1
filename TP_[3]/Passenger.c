@@ -32,7 +32,6 @@ Passenger* Passenger_newParametros(char* idStr,char* nombreStr,char* apellidoStr
 
 	if(auxiliar!=NULL && idStr!=NULL && nombreStr!=NULL && apellidoStr!=NULL && precioStr!=NULL && tipoPasajeroStr!=NULL && codigoVueloStr!=NULL)
 	{
-		// ANTES DEL SET, HAY QUE VALIDAR SI LO QUE RECIBO ES UN DATO VALIDO
 		if(Passenger_setId(auxiliar, atoi(idStr))!=0 || Passenger_setNombre(auxiliar, nombreStr)!=0 || Passenger_setApellido(auxiliar, apellidoStr)!=0
 		   || Passenger_setPrecio(auxiliar, atof(precioStr))!=0 || Passenger_setTipoPasajero(auxiliar, tipoPasajeroStr)!=0
 		   || Passenger_setCodigoVuelo(auxiliar, codigoVueloStr)!=0 || Passenger_setEstadoVuelo(auxiliar, estadoVueloStr)!=0)
@@ -98,7 +97,7 @@ int Passenger_setNombre(Passenger* this,char* nombre)
 {
 	int retorno=-1;
 
-	if (this!=NULL && nombre!=NULL)
+	if (this!=NULL && nombre!=NULL && utn_validarSiEsUnNombreCompuesto(nombre)==1)
 	{
 		strcpy(this->nombre, nombre);
 		retorno=0;
@@ -110,7 +109,7 @@ int Passenger_getNombre(Passenger* this,char* nombre)
 {
 	int retorno=-1;
 
-	if(this!=NULL && nombre!=NULL)
+	if(this!=NULL && nombre!=NULL && utn_validarSiEsNumerico(nombre)==-1)
 	{
 		strcpy(nombre, this->nombre);
 		retorno=0;
@@ -267,7 +266,7 @@ int Passenger_showOnePassenger(Passenger* this)
 }
 int Passenger_showListPassenger(Passenger* this[], int len)
 {
-	int retorno=1;
+	int retorno=-1;
 
 	if(this!=NULL && len>0)
 	{
@@ -278,6 +277,7 @@ int Passenger_showListPassenger(Passenger* this[], int len)
 				Passenger_showOnePassenger(this[i]);
 			}
 		}
+		retorno=0;
 	}
 
 	return retorno;
@@ -319,7 +319,7 @@ int Passenger_findByIdInTheLinkedList(LinkedList* listaPasajeros,int id)
 			{
 				if(idLeido==id)
 				{
-					retorno = i;
+					retorno=i;
 					break;
 				}
 			}
