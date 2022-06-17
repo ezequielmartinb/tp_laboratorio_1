@@ -316,9 +316,15 @@ int ll_clear(LinkedList* this)
  */
 int ll_deleteLinkedList(LinkedList* this)
 {
-    int returnAux = -1;
+    int retorno=-1;
 
-    return returnAux;
+    if(this!=NULL && ll_clear(this)==0)
+    {
+    	free(this);
+    	retorno=0;
+    }
+
+    return retorno;
 }
 
 /** \brief Busca el indice de la primer ocurrencia del elemento pasado como parametro
@@ -331,9 +337,25 @@ int ll_deleteLinkedList(LinkedList* this)
  */
 int ll_indexOf(LinkedList* this, void* pElement)
 {
-    int returnAux = -1;
+    int retorno=-1;
+    int len;
+    void* auxiliarElemento=NULL;
 
-    return returnAux;
+    if(this!=NULL)
+    {
+        len=ll_len(this);
+    	for(int i=0;i<len;i++)
+    	{
+    		auxiliarElemento=ll_get(this, i);
+    		if(auxiliarElemento==pElement)
+    		{
+    			retorno=i;
+    			break;
+    		}
+    	}
+    }
+
+    return retorno;
 }
 
 /** \brief Indica si la lista esta o no vacia
@@ -346,9 +368,23 @@ int ll_indexOf(LinkedList* this, void* pElement)
  */
 int ll_isEmpty(LinkedList* this)
 {
-    int returnAux = -1;
+    int retorno=-1;
+    int len;
 
-    return returnAux;
+    if(this!=NULL)
+    {
+    	len=ll_len(this);
+    	if(len>0)
+    	{
+    		retorno=0;
+    	}
+    	else
+    	{
+    		retorno=1;
+    	}
+    }
+
+    return retorno;
 }
 
 /** \brief Inserta un nuevo elemento en la lista en la posicion indicada
@@ -356,15 +392,24 @@ int ll_isEmpty(LinkedList* this)
  * \param this LinkedList* Puntero a la lista
  * \param nodeIndex int Ubicacion donde se agregara el nuevo elemento
  * \param pElement void* Puntero al nuevo elemento
- * \return int Retorna  (-1) Error: si el puntero a la lista es NULL o (si el indice es menor a 0 o mayor al len de la lista)
+ * \return int Retorna  (-1) Error: si el puntero a la lista es NULL
+ * 							o (si el indice es menor a 0 o mayor al len de la lista)
                         ( 0) Si funciono correctamente
  *
  */
 int ll_push(LinkedList* this, int index, void* pElement)
 {
-    int returnAux = -1;
+    int retorno=-1;
+    int len;
 
-    return returnAux;
+    len=ll_len(this);
+
+    if(this!=NULL && index>=0 && index<=len)
+    {
+    	retorno=addNode(this, index, pElement);
+    }
+
+    return retorno;
 }
 
 
@@ -372,15 +417,25 @@ int ll_push(LinkedList* this, int index, void* pElement)
  *
  * \param this LinkedList* Puntero a la lista
  * \param nodeIndex int Ubicacion del elemento eliminar
- * \return void* Retorna    (NULL) Error: si el puntero a la lista es NULL o (si el indice es menor a 0 o mayor al len de la lista)
+ * \return void* Retorna    (NULL) Error: si el puntero a la lista es NULL
+ * 								o (si el indice es menor a 0 o mayor al len de la lista)
                             (pElement) Si funciono correctamente
  *
  */
 void* ll_pop(LinkedList* this,int index)
 {
-    void* returnAux = NULL;
+    void* retorno=NULL;
+    int len;
 
-    return returnAux;
+    len=ll_len(this);
+
+    if(this!=NULL && index>=0 && index<len)
+    {
+    	retorno=ll_get(this, index);
+    	ll_remove(this, index);
+    }
+
+    return retorno;
 }
 
 
@@ -394,9 +449,20 @@ void* ll_pop(LinkedList* this,int index)
 */
 int ll_contains(LinkedList* this, void* pElement)
 {
-    int returnAux = -1;
+    int retorno=-1;
+    int index;
 
-    return returnAux;
+    if(this!=NULL)
+    {
+    	retorno=0;
+    	index=ll_indexOf(this, pElement);
+    	if(index!=-1)
+    	{
+    		retorno=1;
+    	}
+    }
+
+    return retorno;
 }
 
 /** \brief  Determina si todos los elementos de la lista (this2)
@@ -410,9 +476,27 @@ int ll_contains(LinkedList* this, void* pElement)
 */
 int ll_containsAll(LinkedList* this,LinkedList* this2)
 {
-    int returnAux = -1;
+    int retorno=-1;
+    int lenThis2;
+    void* pElementThis2;
 
-    return returnAux;
+    if(this!=NULL && this2!=NULL)
+    {
+    	lenThis2=ll_len(this2);
+    	retorno=1;
+
+    	for(int i=0;i<lenThis2;i++)
+    	{
+    		pElementThis2=ll_get(this2, i);
+    		if(ll_contains(this, pElementThis2)==0)
+    		{
+    			retorno=0;
+    			break;
+    		}
+    	}
+    }
+
+    return retorno;
 }
 
 /** \brief Crea y retorna una nueva lista con los elementos indicados
@@ -427,9 +511,26 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 */
 LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
-    LinkedList* cloneArray = NULL;
+    LinkedList* cloneSubList=NULL;
+    void* auxiliarElemento=NULL;
 
-    return cloneArray;
+    int len;
+    len=ll_len(this);
+
+    if(this!=NULL && from>=0 && from<len && to<=len && from<to)
+    {
+    	cloneSubList=ll_newLinkedList();
+    	if(cloneSubList!=NULL)
+    	{
+    		for(int i=from;i<to;i++)
+    		{
+    			auxiliarElemento=ll_get(this, i);
+    			ll_add(cloneSubList, auxiliarElemento);
+    		}
+    	}
+    }
+
+    return cloneSubList;
 }
 
 
@@ -442,9 +543,16 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 */
 LinkedList* ll_clone(LinkedList* this)
 {
-    LinkedList* cloneArray = NULL;
+    LinkedList* cloneList=NULL;
+    int len;
 
-    return cloneArray;
+    if(this!=NULL)
+    {
+    	len=ll_len(this);
+    	cloneList=ll_subList(this, 0, len);
+    }
+
+    return cloneList;
 }
 
 
@@ -457,9 +565,38 @@ LinkedList* ll_clone(LinkedList* this)
  */
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 {
-    int returnAux =-1;
+    int retorno=-1;
+    int len;
+    int estaOrdenado;
+    void* auxiliarElemento=NULL;
+    void* auxiliarElemento2=NULL;
 
-    return returnAux;
+    if(this!=NULL && (order==0 || order==1) && pFunc!=NULL)
+    {
+    	len=ll_len(this);
+    	do
+    	{
+    		estaOrdenado=1;
+    		len--;
+    		for(int i=0;i<len;i++)
+    		{
+    			auxiliarElemento=ll_get(this, i);
+    			auxiliarElemento2=ll_get(this, i+1);
+    			if(
+    				(pFunc(auxiliarElemento, auxiliarElemento2)>0 && order==1) ||
+    				(pFunc(auxiliarElemento, auxiliarElemento2)<0 && order==0)
+				   )
+    			{
+    				ll_set(this, i, auxiliarElemento2);
+    				ll_set(this, i+1, auxiliarElemento);
+    				estaOrdenado=0;
+    			}
+    		}
+    	}while(estaOrdenado==0);
+    	retorno=0;
+    }
+
+    return retorno;
 
 }
 
