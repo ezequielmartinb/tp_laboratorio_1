@@ -279,6 +279,11 @@ int utn_validarSiEsUnNombreCompuesto(char cadena[])
 	{
 		while(cadena[i]!='\0')
 		{
+			if(cadena[0]==' ' || cadena[0]=='\n')
+			{
+				retorno=-1;
+				break;
+			}
 			if(cadena[i]==' ')
 			{
 				contadorEspacios++;

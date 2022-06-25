@@ -9,9 +9,9 @@
 #define ACTIVO 1
 #define DEMORADO 2
 #define CANCELADO 3
-#define PRIMERA_CLASE 1
+#define ECONOMICA 1
 #define EJECUTIVA 2
-#define ECONOMICA 3
+#define PRIMERA_CLASE 3
 #define VACIO 1
 #define CARGADO 0
 
@@ -19,10 +19,10 @@ int main(void)
 {
 	Passenger listaPasajeros[TAM_PASAJEROS];
 	Passenger auxiliarListaPasajeros[TAM_PASAJEROS]= {{1001, "Juan Carlos", "Zeballos", 600.50, "EZ360", PRIMERA_CLASE, ACTIVO, CARGADO},
-													   {1002, "Anastacio", "Kirchner", 30000, "AA777", PRIMERA_CLASE, DEMORADO, CARGADO},
+													   {1002, "Anastacio", "Kirchner", 30000, "AA777", ECONOMICA, DEMORADO, CARGADO},
 													   {1003, "Juan Carlos", "Zeballos", 600.50, "AA222", EJECUTIVA, ACTIVO, CARGADO},
 													   {1004, "Ricardo", "Sanchez", 115000.50, "BB752", PRIMERA_CLASE, ACTIVO, CARGADO},
-													   {1005, "Ezequiel", "Barrios", 35000, "TT555", PRIMERA_CLASE, CANCELADO, CARGADO}};
+													   {1005, "Ezequiel", "Barrios", 35000, "TT555", ECONOMICA, CANCELADO, CARGADO}};
 	int opcionIngresada;
 	int opcionIngresadaInformes;
 	int idIngresado;
@@ -61,7 +61,7 @@ int main(void)
 					}
 					else
 					{
-						printf("\n\n\n***********************NO HAY MAS ESPACIO PARA CARGAR PASAJEROS***********************\n\n\n");
+						printf("\n\n\n***********************ERROR AL CARGAR PASAJEROS***********************\n\n\n");
 					}
 					break;
 				case 2:
@@ -72,7 +72,7 @@ int main(void)
 					else
 					{
 						printPassenger(listaPasajeros, TAM_PASAJEROS);
-						if(utn_getNumeroEntero(&idIngresado, "Ingrese el ID que desea modificar: ", "ERROR. ID ERRONEO", 1001, 1002, 3)==-1)
+						if(utn_getNumeroEntero(&idIngresado, "Ingrese el ID que desea modificar: ", "ERROR. ID ERRONEO", 1001, 3001, 3)==-1)
 						{
 							printf("\tMODIFICACION DENEGADA\n");
 						}
@@ -91,7 +91,7 @@ int main(void)
 					else
 					{
 						printPassenger(listaPasajeros, TAM_PASAJEROS);
-						if(utn_getNumeroEntero(&idIngresado, "Ingrese el ID que desea dar de baja: ", "ERROR. ID ERRONEO. ", 1001, 1002, 3)==-1)
+						if(utn_getNumeroEntero(&idIngresado, "Ingrese el ID que desea dar de baja: ", "ERROR. ID ERRONEO. ", 1001, 3001, 3)==-1)
 						{
 							printf("\tBAJA DENEGADA\n");
 						}

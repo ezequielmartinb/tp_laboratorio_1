@@ -67,6 +67,13 @@ indicate UP or DOWN order
 *
 */
 int sortPassengers(Passenger* list, int len, int order);
+/// @fn void mostrarUnPasajeros(Passenger) Muestra un pasajero
+/// @brief
+///
+/// @pre
+/// @post
+/// @param list
+void mostrarUnPasajeros(Passenger list);
 /** \brief print the content of passengers array
 *
 * \param list Passenger*
