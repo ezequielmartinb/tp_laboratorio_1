@@ -32,7 +32,7 @@ int main()
     int banderaAlta;
 
     banderaGuardarDeDatosTxt=0;
-    banderaGuardarDeDatosBin=1;
+    banderaGuardarDeDatosBin=0;
     banderaCargarDeDatosTxt=1;
     banderaCargarDeDatosBin=1;
     banderaAlta=1;
@@ -43,14 +43,14 @@ int main()
 	{
 		printf("\t**********************BIENVENIDO A LA APP UTN LINKEDLIST**********************\n\n");
 		printf("1- Cargar los datos de los pasajeros desde el archivo data.csv (modo texto).\n"
-			   "2- Cargar los datos de los pasajeros desde el archivo data.csv (modo binario).\n"
+			   "2- Cargar los datos de los pasajeros desde el archivo data.bin (modo binario).\n"
 			   "3- Alta de pasajero\n"
 			   "4- Modificar datos de pasajero\n"
 			   "5- Baja de pasajero\n"
 			   "6- Listar pasajero\n"
 			   "7- Ordenar pasajero\n"
 			   "8- Guardar los datos de los pasajeros en el archivo data.csv (modo texto)\n"
-			   "9- Guardar los datos de los pasajeros en el archivo data.csv (modo binario)\n"
+			   "9- Guardar los datos de los pasajeros en el archivo data.bin (modo binario)\n"
 			   "10- SALIR \n\n");
 		if(utn_getNumeroEntero(&opcionIngresada, "Ingrese una opcion: ", "ERROR. OPCION INVALIDA. ", 1, 10, 3)==0)
 		{
@@ -63,7 +63,7 @@ int main()
 					}
 					else
 					{
-						if(controller_loadFromText("data.csv",listaPasajeros)!=-1)
+						if(controller_loadFromText("data.csv",listaPasajeros)!=-1 && controller_ListPassenger(listaPasajeros)==0)
 						{
 							banderaCargarDeDatosTxt=0;
 							printf("\n\n\n**********************LA CARGA DE DATOS EN TEXTO SE REALIZO CON EXITO**********************\n\n\n");
@@ -77,7 +77,7 @@ int main()
 					}
 					else
 					{
-						if(controller_loadFromBinary("data.bin",listaPasajeros)!=-1)
+						if(controller_loadFromBinary("data.bin",listaPasajeros)!=-1 && controller_ListPassenger(listaPasajeros)==0)
 						{
 							banderaCargarDeDatosBin=0;
 							printf("\n\n\n**********************LA CARGA DE DATOS EN BINARIO SE REALIZO CON EXITO**********************\n\n\n");
@@ -88,6 +88,7 @@ int main()
 					if(controller_addPassenger(listaPasajeros)==0)
 					{
 						banderaAlta=0;
+						controller_ListPassenger(listaPasajeros);
 						printf("\n\n\n**********************ALTA EXITOSA**********************\n\n\n");
 					}
 					else
@@ -100,7 +101,7 @@ int main()
 					{
 						printf("\n\n\n**********************ANTES DE MODIFICAR, PRIMERO HAY QUE DAR DE ALTA O CARGAR LOS ARCHIVOS**********************\n\n\n");
 					}
-					else if(controller_editPassenger(listaPasajeros)==0)
+					else if(controller_editPassenger(listaPasajeros)==0 && controller_ListPassenger(listaPasajeros)==0)
 					{
 						printf("\n\n\n**********************MODIFICACION EXITOSA**********************\n\n\n");
 					}
@@ -115,7 +116,7 @@ int main()
 					{
 						printf("\n\n\n**********************ANTES DE DAR DE BAJA, PRIMERO HAY QUE DAR DE ALTA O CARGAR LOS ARCHIVOS**********************\n\n\n");
 					}
-					else if(controller_removePassenger(listaPasajeros)!=-1)
+					else if(controller_removePassenger(listaPasajeros)!=-1 && controller_ListPassenger(listaPasajeros)==0)
 					{
 						printf("\n\n\n**********************BAJA EXITOSA**********************\n\n\n");
 					}
@@ -135,11 +136,11 @@ int main()
 					}
 					break;
 				case 7:
-					if((banderaCargarDeDatosTxt==1 && banderaCargarDeDatosBin==1) && banderaAlta==1)
+					if(banderaCargarDeDatosTxt==1 && banderaCargarDeDatosBin==1 && banderaAlta==1)
 					{
 						printf("\n\n\n**********************ANTES DE ORDENAR, PRIMERO HAY QUE DAR DE ALTA O CARGAR LOS ARCHIVOS**********************\n\n\n");
 					}
-					else if(controller_sortPassenger(listaPasajeros)==0)
+					else if(controller_sortPassenger(listaPasajeros)==0 && controller_ListPassenger(listaPasajeros)==0)
 					{
 						printf("\n\n\n**********************LA LISTA SE ORDENO DE FORMA EXITOSA**********************\n\n\n");
 					}

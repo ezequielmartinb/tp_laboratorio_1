@@ -19,7 +19,8 @@ int controller_loadFromText(char* path, LinkedList* pArrayListPassenger)
 
 	if(path!=NULL && pArrayListPassenger!=NULL)
 	{
-		retorno=parser_PassengerFromText(pArchivo, pArrayListPassenger, path);
+		pArchivo=fopen(path,"r");
+		retorno=parser_PassengerFromText(pArchivo, pArrayListPassenger);
 	}
 	return retorno;
 }
@@ -32,12 +33,16 @@ int controller_loadFromText(char* path, LinkedList* pArrayListPassenger)
 int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger)
 {
 	int retorno;
-	FILE* pArchivo;
+	int len;
+	FILE* pArchivo=NULL;
 	if(path!=NULL && pArrayListPassenger!=NULL)
 	{
-		pArchivo=fopen(path, "rb");
-		retorno=parser_PassengerFromBinary(pArchivo, pArrayListPassenger, path);
+		pArchivo=fopen(path,"rb");
+		retorno=parser_PassengerFromBinary(pArchivo, pArrayListPassenger);
+		fclose(pArchivo);
 	}
+	len=ll_len(pArrayListPassenger);
+	ll_remove(pArrayListPassenger, len-1);
 	return retorno;
 }
 /// @brief Busca el ultimo id que se cargo
@@ -386,28 +391,23 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger)
 	Passenger* auxiliarPasajeros=NULL;
 	char opcion;
 	int len;
-	int cantidad;
 
 	if(path!=NULL && pArrayListPassenger!=NULL)
 	{
-
 		if(utn_getUnCaracter(&opcion, "\nEsta accion sobreescribira los archivos. Desea sobreescribir los archivos? Y/N\n", "ERROR. OPCION INVALIDA", 'A', 'Z', 3)==0 && opcion=='Y')
 		{
-			pArchivo=fopen(path,"wb");
-			len=ll_len(pArrayListPassenger);
-			for(int i=0;i<len;i++)
+			if(pArrayListPassenger != NULL && path != NULL)
 			{
-				auxiliarPasajeros=(Passenger*) ll_get(pArrayListPassenger, i);
-				if(auxiliarPasajeros!=NULL)
+				retorno=0;
+				pArchivo=fopen(path, "wb");
+				len=ll_len(pArrayListPassenger);
+
+				for(int i=0; i<len; i++)
 				{
-					cantidad=fwrite(auxiliarPasajeros,sizeof(Passenger),1,pArchivo);
-					retorno=0;// LOS DATOS SE GUARDARON CON EXITO
+					auxiliarPasajeros=(Passenger*) ll_get(pArrayListPassenger, i);
+					fwrite(auxiliarPasajeros, sizeof(Passenger), 1, pArchivo);
 				}
-				if(cantidad<1)
-				{
-					retorno=1;// ERROR AL GUARDAR LOS ARCHIVOS
-					break;
-				}
+
 			}
 			fclose(pArchivo);
 		}

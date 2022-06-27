@@ -97,7 +97,7 @@ int Passenger_setNombre(Passenger* this,char* nombre)
 {
 	int retorno=-1;
 
-	if (this!=NULL && nombre!=NULL && utn_validarSiEsUnNombreCompuesto(nombre)==1)
+	if (this!=NULL && nombre!=NULL)
 	{
 		strcpy(this->nombre, nombre);
 		retorno=0;
@@ -109,7 +109,7 @@ int Passenger_getNombre(Passenger* this,char* nombre)
 {
 	int retorno=-1;
 
-	if(this!=NULL && nombre!=NULL && utn_validarSiEsNumerico(nombre)==-1)
+	if(this!=NULL && nombre!=NULL)
 	{
 		strcpy(nombre, this->nombre);
 		retorno=0;

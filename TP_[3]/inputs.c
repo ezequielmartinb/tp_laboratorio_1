@@ -256,7 +256,7 @@ int utn_validarSiEsUnNombreCompuesto(char cadena[])
 			if(cadena[i]==' ')
 			{
 				contadorEspacios++;
-				printf("LA CANTIDAD DE ESPACIOS ES: %d\n", contadorEspacios);
+				//printf("LA CANTIDAD DE ESPACIOS ES: %d\n", contadorEspacios);
 			}
 			if(((cadena[i]<'A' || cadena[i]>'Z') || (cadena[i]<'a' && cadena[i]>'z')) && contadorEspacios>=2)
 			{
