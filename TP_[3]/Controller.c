@@ -71,15 +71,14 @@ static int controller_lastID(LinkedList* pArrayListPassenger)
 static int controller_maximiumId(LinkedList* pArrayListPassenger,int* nuevoId)
 {
 	int retorno=-1;
-    static int id=0 ;
+	static int id=0 ;
     static int banderaDelPrimerIdIngresado=1;
-
     if(pArrayListPassenger!=NULL)
     {
     	if(banderaDelPrimerIdIngresado==1)
     	{
     		id=controller_lastID(pArrayListPassenger);
-    		banderaDelPrimerIdIngresado=0;;
+    		banderaDelPrimerIdIngresado=0;
     	}
     	*nuevoId=id++;
     	retorno=0;
