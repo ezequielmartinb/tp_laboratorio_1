@@ -48,7 +48,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger)
 /// @brief Busca el ultimo id que se cargo
 /// @param pArrayListPassenger
 /// @return retorna el ultimo id que se cargo
-int controller_lastID(LinkedList* pArrayListPassenger)
+static int controller_lastID(LinkedList* pArrayListPassenger)
 {
 	Passenger* auxiliarPasajeros;
 	int id=0;
@@ -57,16 +57,35 @@ int controller_lastID(LinkedList* pArrayListPassenger)
 
 	for(int i=0;i<len;i++)
 	{
-		if(i==len-1)
-		{
-			auxiliarPasajeros=(Passenger*) ll_get(pArrayListPassenger, i);
-			Passenger_getId(auxiliarPasajeros, &id);
-		}
-	}
+		auxiliarPasajeros=(Passenger*) ll_get(pArrayListPassenger, i);
+		Passenger_getId(auxiliarPasajeros, &id);
 
+	}
 	return id;
 }
+/// @brief Busca el ID maximo y lo guarda de forma estatica
+///
+/// @param pArrayListPassenger
+/// @param nuevoId
+/// @return Retona 0 en caso de exito y -1 en caso de error
+static int controller_maximiumId(LinkedList* pArrayListPassenger,int* nuevoId)
+{
+	int retorno=-1;
+    static int id=0 ;
+    static int banderaDelPrimerIdIngresado=1;
 
+    if(pArrayListPassenger!=NULL)
+    {
+    	if(banderaDelPrimerIdIngresado==1)
+    	{
+    		id=controller_lastID(pArrayListPassenger);
+    		banderaDelPrimerIdIngresado=0;;
+    	}
+    	*nuevoId=id++;
+    	retorno=0;
+    }
+    return retorno;
+}
 
 /** \brief Alta de pasajero
  * \param path char*
@@ -91,8 +110,10 @@ int controller_addPassenger(LinkedList* pArrayListPassenger)
 	if(pArrayListPassenger!=NULL)
 	{
 		nuevoPasajero=Passenger_new();
-		id=controller_lastID(pArrayListPassenger);
-		id++;
+		if(controller_maximiumId(pArrayListPassenger,&id)==0)
+		{
+			id++;
+		}
 		if(utn_getNombre(nombre, 50, "Ingrese el nombre del pasajero: ", "ERROR. NOMBRE INVALIDO. ", 3)==0 &&
 		   utn_getNombre(apellido, 50, "Ingrese el apellido del pasajero: ", "ERROR. APELLIDO INVALIDO. ", 3)==0 &&
 		   utn_getNumeroFlotante(&precio, "Ingrese el precio: ", "ERROR. PRECIO INVALIDO. ", 1, 3000000, 3)==0 &&
