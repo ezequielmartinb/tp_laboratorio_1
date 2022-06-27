@@ -124,5 +124,14 @@ int contarPasajerosPorPrecio(Passenger* list, int len, float promedio);
 /// @param lenListaHarcodeada int
 /// @return Retorna 0 en caso de EXITO y retorna -1 en caso de ERROR
 int cargaForzada(Passenger* list, Passenger* listaHardcodeada, int lenList, int lenListaHarcodeada);
+/// @brief Busca el ultimo ID ingresado en la lista y lo devuelve
+///
+/// @pre
+/// @post
+/// @param list Passenger*
+/// @param len int
+/// @return Retorno -1 en caso de error y el ultimo id en caso de exito
+int ultimoId(Passenger* list, int len);
+
 
 #endif /* ARRAYPASSENGER_H_ */

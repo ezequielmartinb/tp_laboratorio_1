@@ -18,7 +18,7 @@
 int main(void)
 {
 	Passenger listaPasajeros[TAM_PASAJEROS];
-	Passenger auxiliarListaPasajeros[TAM_PASAJEROS]= {{1001, "Juan Carlos", "Zeballos", 600.50, "EZ360", PRIMERA_CLASE, ACTIVO, CARGADO},
+	Passenger auxiliarListaPasajeros[TAM_PASAJEROS]= { {1001, "Juan Carlos", "Zeballos", 600.50, "EZ360", PRIMERA_CLASE, ACTIVO, CARGADO},
 													   {1002, "Anastacio", "Kirchner", 30000, "AA777", ECONOMICA, DEMORADO, CARGADO},
 													   {1003, "Juan Carlos", "Zeballos", 600.50, "AA222", EJECUTIVA, ACTIVO, CARGADO},
 													   {1004, "Ricardo", "Sanchez", 115000.50, "BB752", PRIMERA_CLASE, ACTIVO, CARGADO},
@@ -31,6 +31,7 @@ int main(void)
 	float promedio;
 	int cantidadDePasajerosSuperanPrecioPromedio;
 	char confirmarCargaForzada;
+	int ultimoID;
 	setbuf(stdout, NULL);
 
 	initPassengers(listaPasajeros, TAM_PASAJEROS);
@@ -72,7 +73,8 @@ int main(void)
 					else
 					{
 						printPassenger(listaPasajeros, TAM_PASAJEROS);
-						if(utn_getNumeroEntero(&idIngresado, "Ingrese el ID que desea modificar: ", "ERROR. ID ERRONEO", 1001, 3001, 3)==-1)
+						ultimoID=ultimoId(listaPasajeros, TAM_PASAJEROS);
+						if(utn_getNumeroEntero(&idIngresado, "Ingrese el ID que desea modificar: ", "ERROR. ID ERRONEO", 1001, ultimoID, 3)==-1)
 						{
 							printf("\tMODIFICACION DENEGADA\n");
 						}
@@ -91,7 +93,8 @@ int main(void)
 					else
 					{
 						printPassenger(listaPasajeros, TAM_PASAJEROS);
-						if(utn_getNumeroEntero(&idIngresado, "Ingrese el ID que desea dar de baja: ", "ERROR. ID ERRONEO. ", 1001, 3001, 3)==-1)
+						ultimoID=ultimoId(listaPasajeros, TAM_PASAJEROS);
+						if(utn_getNumeroEntero(&idIngresado, "Ingrese el ID que desea dar de baja: ", "ERROR. ID ERRONEO. ", 1001, ultimoID, 3)==-1)
 						{
 							printf("\tBAJA DENEGADA\n");
 						}

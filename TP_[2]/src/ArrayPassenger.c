@@ -390,3 +390,20 @@ int cargaForzada(Passenger* list, Passenger* listaHardcodeada, int lenList, int 
 	}
 	return retorno;
 }
+int ultimoId(Passenger* list, int len)
+{
+	int retorno=-1;
+
+	if(list!=NULL && len>0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			if(list[i].isEmpty==CARGADO)
+			{
+				retorno=list[i].id;
+			}
+
+		}
+	}
+	return retorno;
+}
