@@ -15,7 +15,7 @@
 int utn_getUnCaracter(char* unCaracter, char* mensaje, char* mensajeError, char minimo, char maximo, int reintentos);
 // PEDIR STRING
 
-/// @brief Funciona para pedir un string validado
+/// @brief Funciona para pedir un codigo de vuelo validado
 ///
 /// @pre
 /// @post
@@ -25,7 +25,7 @@ int utn_getUnCaracter(char* unCaracter, char* mensaje, char* mensajeError, char 
 /// @param mensajeError[] char
 /// @param reintentos int
 /// @return
-int utn_getString(char cadena[], int len, char mensaje[], char mensajeError[], int reintentos);
+int utn_getFlyCode(char cadena[], int len, char mensaje[], char mensajeError[], int reintentos);
 /// @brief Funcion para validar que la cadena que se ingresa no desborde el tamaño de la variable a escribir
 ///
 /// @pre
@@ -124,5 +124,13 @@ int utn_validarSiEsNumericoEnCadena(char cadena[]);
 /// @param len int
 /// @return retorna 1 en caso de EXITO y -1 en caso de ERROR
 int utn_formatearNombre(char cadena[], int len);
+/// @brief Funcion para validar si la cadena es un codigo de vuelo valido
+///
+/// @pre
+/// @post
+/// @param cadena[] char
+/// @param len int
+/// @return Retorna 0 si LA CADENA NO ES UN CODIGO DE VUELO VALIDO; -1 si hubo un error y 1 si LA CADENA ES UN CODIGO DE VUELO VALIDO
+int utn_ValidarSiEsCodigoVuelo(char cadena[],int len);
 
 #endif /* INPUTS_H_ */

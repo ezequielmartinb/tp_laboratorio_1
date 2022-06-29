@@ -6,7 +6,7 @@
 
 
 // PEDIR STRING
-int utn_getString(char cadena[], int len, char mensaje[], char mensajeError[], int reintentos)
+int utn_getFlyCode(char cadena[], int len, char mensaje[], char mensajeError[], int reintentos)
 {
 	int retorno;
 	char auxiliar[256];
@@ -16,7 +16,7 @@ int utn_getString(char cadena[], int len, char mensaje[], char mensajeError[], i
 		while(reintentos>0)
 		{
 			printf("%s", mensaje);
-			if(utn_myGets(auxiliar, 256)==0)
+			if(utn_myGets(auxiliar, 256)==0 && utn_ValidarSiEsCodigoVuelo(auxiliar, 256)==1)
 			{
 				retorno=0;
 				strncpy(cadena, auxiliar, len);
@@ -335,6 +335,25 @@ int utn_getUnCaracter(char* unCaracter, char* mensaje, char* mensajeError, char 
 				printf("CANTIDAD DE REINTENTOS: %d\n", reintentos);
 			}
 			reintentos--;
+		}
+	}
+	return retorno;
+}
+int utn_ValidarSiEsCodigoVuelo(char cadena[],int len)
+{
+	int retorno;
+	retorno=-1;
+	if(cadena!=NULL && len>0)
+	{
+		retorno=1;
+		for(int i=0;i<len && cadena[i]!='\0';i++)
+		{
+			cadena[i]=toupper(cadena[i]);
+			if((i<=2 && (cadena[i]<'A' || cadena[i]>'Z')) || (i>=3 && i<7 && (cadena[i]<'0' || cadena[i]>'9')) || (i>=7 && (cadena[i]<'A' || cadena[i]>'Z')))
+			{
+				retorno=0;
+				break;
+			}
 		}
 	}
 	return retorno;

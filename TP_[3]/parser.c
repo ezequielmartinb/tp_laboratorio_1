@@ -62,20 +62,88 @@ int parser_PassengerFromBinary(FILE* pFile , LinkedList* pArrayListPassenger)
 {
 	int retorno=-1;
 	Passenger* auxiliarPasajeros=NULL;
+	int cantidad;
+	int auxiliarId;
+	char auxiliarNombre[50];
+	char auxiliarApellido[50];
+	float auxiliarPrecio;
+	char auxiliarCodigoVuelo[20];
+	char auxiliarTipoPasajero[50];
+	char auxiliarEstadoVuelo[50];
 
 	if(pFile!=NULL && pArrayListPassenger!=NULL)
 	{
 		do
 		{
 			auxiliarPasajeros=Passenger_new();
+			cantidad=fread(auxiliarPasajeros, sizeof(Passenger), 1, pFile);
+
+			if(cantidad==1 && auxiliarPasajeros!=NULL)
+			{
+				if(Passenger_getId(auxiliarPasajeros,&auxiliarId)==0 &&
+				   Passenger_getNombre(auxiliarPasajeros,auxiliarNombre)==0 &&
+				   Passenger_getApellido(auxiliarPasajeros, auxiliarApellido)==0 &&
+				   Passenger_getPrecio(auxiliarPasajeros, &auxiliarPrecio)==0 &&
+				   Passenger_getCodigoVuelo(auxiliarPasajeros, auxiliarCodigoVuelo)==0 &&
+				   Passenger_getTipoPasajero(auxiliarPasajeros, auxiliarTipoPasajero)==0 &&
+				   Passenger_getEstadoVuelo(auxiliarPasajeros, auxiliarEstadoVuelo)==0)
+				{
+					 ll_add(pArrayListPassenger,auxiliarPasajeros);
+					 retorno=0;
+				}
+				else
+				{
+					Passenger_delete(auxiliarPasajeros);
+				}
+			}
+		}while(!feof(pFile));
+	}
+
+	fclose(pFile);
+
+	return retorno;
+}
+/*
+ * 	int retorno=-1;
+	Passenger* auxiliarPasajeros=NULL;
+	int cantidad;
+	int auxiliarId;
+	char auxiliarNombre[50];
+	char auxiliarApellido[50];
+	float auxiliarPrecio;
+	char auxiliarCodigoVuelo[20];
+	char auxiliarTipoPasajero[50];
+	char auxiliarEstadoVuelo[50];
+
+	if(pFile!=NULL && pArrayListPassenger!=NULL)
+	{
+		do
+		{
+			cantidad=fread(&auxiliarPasajeros,sizeof(Passenger),1,pFile);
+			auxiliarPasajeros=Passenger_new();
 			fread(auxiliarPasajeros, sizeof(Passenger), 1, pFile);
 			ll_add(pArrayListPassenger, auxiliarPasajeros);
 			retorno=0;
 
+			if(cantidad==1 && auxiliarPasajeros!=NULL)
+			{
+				if(Passenger_getId(auxiliarPasajeros,&auxiliarId)==0 &&
+				   Passenger_getNombre(auxiliarPasajeros,auxiliarNombre)==0 &&
+				   Passenger_getApellido(auxiliarPasajeros, auxiliarApellido)==0 &&
+				   Passenger_getPrecio(auxiliarPasajeros, &auxiliarPrecio)==0 &&
+				   Passenger_getCodigoVuelo(auxiliarPasajeros, auxiliarCodigoVuelo)==0 &&
+				   Passenger_getTipoPasajero(auxiliarPasajeros, auxiliarTipoPasajero)==0 &&
+				   Passenger_getEstadoVuelo(auxiliarPasajeros, auxiliarEstadoVuelo)==0)
+				{
+					 ll_add(pArrayListPassenger,auxiliarPasajeros);
+					 retorno=0;
+				}
+				else
+				{
+					Passenger_delete(auxiliarPasajeros);
+				}
+			}
 		}while(!feof(pFile));
 
 		fclose(pFile);
-	}
-
-	return retorno;
-}
+ */

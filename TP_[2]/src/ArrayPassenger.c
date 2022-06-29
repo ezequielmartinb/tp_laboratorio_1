@@ -71,7 +71,7 @@ int addPassenger(Passenger* list, int len, int id, char name[],char lastName[],f
 			   utn_getNombre(list[indexLibre].lastName, 51, "Ingrese el apellido del pasajero: ", "ERROR. APELLIDO INVALIDO. ", 3)==0 &&
 			   utn_getNumeroFlotante(&list[indexLibre].price, "Ingrese el precio del vuelo: ", "ERROR. PRECIO INVALIDO. ", 1, 10000000, 3)==0 &&
 			   utn_getNumeroEntero(&list[indexLibre].typePassenger, "Ingrese el tipo de pasajero (1-Economica; 2-Ejecutiva; 3-Primera Clase): ", "ERROR. TIPO DE PASAJERO INVALIDO. ", 1, 3, 3)==0 &&
-			   utn_getString(list[indexLibre].flyCode, 10, "Ingrese el codigo del vuelo: ", "ERROR. CODIGO ERRONEO. ", 3)==0 &&
+			   utn_getFlyCode(list[indexLibre].flyCode, 10, "Ingrese el codigo del vuelo (MODELO: LLL0000L): ", "ERROR. CODIGO ERRONEO. ", 3)==0 &&
 			   utn_getNumeroEntero(&list[indexLibre].statusFlight, "Ingrese el estado del vuelo (1-Activo; 2-Demorado; 3-Cancelado): ", "ERROR. ESTADO DE VUELO INVALIDO. ", 1, 3, 3)==0
 			   )
 			{
@@ -147,7 +147,7 @@ int modifyPassenger(Passenger* list, int len, int id)
 							}
 							break;
 						case 5:
-							if(utn_getString(list[index].flyCode, 10, "Ingrese el NUEVO codigo del vuelo: ", "ERROR. CODIGO ERRONEO. ", 3)==-1)
+							if(utn_getFlyCode(list[index].flyCode, 10, "Ingrese el NUEVO codigo del vuelo: (MODELO: LLL0000L)", "ERROR. CODIGO ERRONEO. ", 3)==-1)
 							{
 								retorno=-1;
 								printf("El codigo de vuelo NO fue cargado con exito\n");
