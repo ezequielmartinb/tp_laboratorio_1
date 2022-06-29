@@ -91,7 +91,7 @@ int utn_getNumeroEntero(int* pNumeroIngresado, char* mensaje, char* mensajeError
 	char auxiliarNumeroIngresado[256];
 	int auxiliarNumeroEnteroIngresado;
 
-	if(pNumeroIngresado!=NULL && mensaje!=NULL && mensajeError!=NULL && maximo>minimo && reintentos>0)
+	if(pNumeroIngresado!=NULL && mensaje!=NULL && mensajeError!=NULL && maximo>=minimo && reintentos>0)
 	{
 		while(reintentos>0)
 		{
