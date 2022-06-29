@@ -196,7 +196,7 @@ int sortPassengers(Passenger* list, int len, int order)
 	Passenger auxiliar;
 	int estaOrdenado;
 
-	if(list!=NULL && len>0)
+	if(list!=NULL && len>0 && (order==0 || order==1))
 	{
 		do
 		{
@@ -204,14 +204,14 @@ int sortPassengers(Passenger* list, int len, int order)
 			len--;
 			for(i=0;i<len;i++)
 			{
-				if(order==1 && (strcmp(list[i].lastName, list[i+1].lastName)>0 || (strcmp(list[i].lastName, list[i+1].lastName)==0 && list[i].typePassenger>=list[i+1].typePassenger)))
+				if(order==1 && (strcmp(list[i].lastName, list[i+1].lastName)>0 || (strcmp(list[i].lastName, list[i+1].lastName)==0 && list[i].typePassenger>list[i+1].typePassenger)))
 				{
 					auxiliar=list[i];
 					list[i]=list[i+1];
 					list[i+1]=auxiliar;
 					estaOrdenado=0;
 				}
-				else if(strcmp(list[i].lastName, list[i+1].lastName)<0 || (strcmp(list[i].lastName, list[i+1].lastName)==0 && list[i].typePassenger<=list[i+1].typePassenger))
+				else if(order==0 && (strcmp(list[i].lastName, list[i+1].lastName)<0 || (strcmp(list[i].lastName, list[i+1].lastName)==0 && list[i].typePassenger<list[i+1].typePassenger)))
 				{
 					auxiliar=list[i];
 					list[i]=list[i+1];
@@ -300,30 +300,29 @@ int sortPassengersByCode(Passenger* list, int len, int order)
 	Passenger auxiliar;
 	int estaOrdenado;
 
-	if(list!=NULL && len>0)
+	if(list!=NULL && len>0 && (order==0 || order==1))
 	{
 		do
 		{
 			estaOrdenado=1;
 			len--;
-
-				for(i=0;i<len;i++)
+			for(i=0;i<len;i++)
+			{
+				if(order==1 && strcmp(list[i].flyCode, list[i+1].flyCode)>0 && list[i].statusFlight==ACTIVO)
 				{
-					if(order==1 && strcmp(list[i].flyCode, list[i+1].flyCode)>0 && list[i].statusFlight==ACTIVO)
-					{
-						auxiliar=list[i];
-						list[i]=list[i+1];
-						list[i+1]=auxiliar;
-						estaOrdenado=0;
-					}
-					else if(strcmp(list[i].flyCode, list[i+1].flyCode)<0 && list[i].statusFlight==ACTIVO)
-					{
-						auxiliar=list[i];
-						list[i]=list[i+1];
-						list[i+1]=auxiliar;
-						estaOrdenado=0;
-					}
+					auxiliar=list[i];
+					list[i]=list[i+1];
+					list[i+1]=auxiliar;
+					estaOrdenado=0;
 				}
+				else if(order==0 && strcmp(list[i].flyCode, list[i+1].flyCode)<0 && list[i].statusFlight==ACTIVO)
+				{
+					auxiliar=list[i];
+					list[i]=list[i+1];
+					list[i+1]=auxiliar;
+					estaOrdenado=0;
+				}
+			}
 
 		}while(estaOrdenado==0);
 		retorno=0;

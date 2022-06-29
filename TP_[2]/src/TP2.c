@@ -18,11 +18,11 @@
 int main(void)
 {
 	Passenger listaPasajeros[TAM_PASAJEROS];
-	Passenger auxiliarListaPasajeros[TAM_PASAJEROS]= { {1001, "Juan Carlos", "Zeballos", 600.50, "EZE3600Z", PRIMERA_CLASE, ACTIVO, CARGADO},
-													   {1002, "Anastacio", "Kirchner", 30000, "AAA7777A", ECONOMICA, DEMORADO, CARGADO},
-													   {1003, "Juan Carlos", "Zeballos", 600.50, "AAA2222B", EJECUTIVA, ACTIVO, CARGADO},
-													   {1004, "Ricardo", "Sanchez", 115000.50, "BBB7520C", PRIMERA_CLASE, ACTIVO, CARGADO},
-													   {1005, "Ezequiel", "Barrios", 35000, "TTT5555B", ECONOMICA, CANCELADO, CARGADO}};
+	Passenger auxiliarListaPasajeros[TAM_PASAJEROS]= { {1001, "Juan Carlos", "Navarro", 600.50, "EZE3600Z", PRIMERA_CLASE, ACTIVO, CARGADO},
+													   {1002, "Anastacio", "Alonso", 30000, "AAA7777A", ECONOMICA, DEMORADO, CARGADO},
+													   {1003, "Juan Carlos", "Zeballos", 600.50, "AAA2222B", EJECUTIVA, DEMORADO, CARGADO},
+													   {1004, "Ricardo", "Ruben", 115000.50, "BBB7520C", PRIMERA_CLASE, ACTIVO, CARGADO},
+													   {1005, "Ezequiel", "Zeballos", 35000, "TTT5555B", ECONOMICA, CANCELADO, CARGADO}};
 	int opcionIngresada;
 	int opcionIngresadaInformes;
 	int idIngresado;
