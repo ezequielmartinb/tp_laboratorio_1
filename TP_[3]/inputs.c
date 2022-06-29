@@ -349,7 +349,7 @@ int utn_ValidarSiEsCodigoVuelo(char cadena[],int len)
 		for(int i=0;i<len && cadena[i]!='\0';i++)
 		{
 			cadena[i]=toupper(cadena[i]);
-			if((i<=2 && (cadena[i]<'A' || cadena[i]>'Z')) || (i>=3 && i<7 && (cadena[i]<'0' || cadena[i]>'9')) || (i>=7 && (cadena[i]<'A' || cadena[i]>'Z')))
+			if((i<=1 && (cadena[i]<'A' || cadena[i]>'Z')) || (i>=2 && i<6 && (cadena[i]<'0' || cadena[i]>'9')) || (i>=6 && (cadena[i]<'A' || cadena[i]>'Z')))
 			{
 				retorno=0;
 				break;

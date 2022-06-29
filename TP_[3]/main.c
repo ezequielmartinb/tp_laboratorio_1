@@ -25,21 +25,12 @@ int main()
 {
     LinkedList* listaPasajeros=ll_newLinkedList();
     int opcionIngresada;
-    int banderaGuardarDeDatosTxt;
-    int banderaGuardarDeDatosBin;
     int banderaCargarDeDatosTxt;
     int banderaCargarDeDatosBin;
     int banderaAlta;
-    int banderaCargarUnaVezTxt;
-    int banderaCargarUnaVezBin;
-
-    banderaGuardarDeDatosTxt=0;
-    banderaGuardarDeDatosBin=0;
     banderaCargarDeDatosTxt=1;
     banderaCargarDeDatosBin=1;
     banderaAlta=1;
-    banderaCargarUnaVezTxt=1;
-    banderaCargarUnaVezBin=1;
 
     setbuf(stdout, NULL);
 
@@ -61,41 +52,34 @@ int main()
 			switch(opcionIngresada)
 			{
 				case 1:
-					if(banderaGuardarDeDatosTxt==1)
+					if(banderaCargarDeDatosTxt==1 && banderaCargarDeDatosBin==1 && (controller_loadFromText("data.csv",listaPasajeros)!=-1 && controller_ListPassenger(listaPasajeros)==0))
 					{
-						printf("\n\n\n**********************ANTES DE CARGAR LOS ARCHIVOS EN TEXTO, PRIMERO HAY QUE GUARDAR**********************\n\n\n");
+						banderaCargarDeDatosTxt=0;
+						printf("\n\n\n**********************LA CARGA DE DATOS EN TEXTO SE REALIZO CON EXITO**********************\n\n\n");
+					}
+					else if(banderaCargarDeDatosTxt==0)
+					{
+						printf("\n\n\n**********************YA SE CARGO LA LISTA**********************\n\n\n");
 					}
 					else
 					{
-						if(banderaCargarUnaVezTxt==1 && (controller_loadFromText("data.csv",listaPasajeros)!=-1 && controller_ListPassenger(listaPasajeros)==0))
-						{
-							banderaCargarDeDatosTxt=0;
-							banderaCargarUnaVezTxt=0;
-							printf("\n\n\n**********************LA CARGA DE DATOS EN TEXTO SE REALIZO CON EXITO**********************\n\n\n");
-						}
-						if(banderaCargarUnaVezTxt==0)
-						{
-							printf("\n\n\n**********************YA SE CARGO LA LISTA EN TEXTO**********************\n\n\n");
-						}
+						printf("\n\n\n**********************ERROR AL CARGAR LA LISTA**********************\n\n\n");
 					}
+
 					break;
 				case 2:
-					if(banderaGuardarDeDatosBin==1)
+					if(banderaCargarDeDatosBin==1 && banderaCargarDeDatosTxt==1 && (controller_loadFromBinary("data.bin",listaPasajeros)!=-1 && controller_ListPassenger(listaPasajeros)==0))
 					{
-						printf("\n\n\n**********************ANTES DE CARGAR LOS ARCHIVOS BINARIO, PRIMERO HAY QUE GUARDAR**********************\n\n\n");
+						banderaCargarDeDatosBin=0;
+						printf("\n\n\n**********************LA CARGA DE DATOS EN BINARIO SE REALIZO CON EXITO**********************\n\n\n");
+					}
+					else if(banderaCargarDeDatosBin==0)
+					{
+						printf("\n\n\n**********************YA SE CARGO LA LISTA**********************\n\n\n");
 					}
 					else
 					{
-						if(banderaCargarUnaVezBin==1 && (controller_loadFromBinary("data.bin",listaPasajeros)!=-1 && controller_ListPassenger(listaPasajeros)==0))
-						{
-							banderaCargarDeDatosBin=0;
-							banderaCargarUnaVezBin=0;
-							printf("\n\n\n**********************LA CARGA DE DATOS EN BINARIO SE REALIZO CON EXITO**********************\n\n\n");
-						}
-						if(banderaCargarUnaVezBin==0)
-						{
-							printf("\n\n\n**********************YA SE CARGO LA LISTA EN BINARIO**********************\n\n\n");
-						}
+						printf("\n\n\n**********************ERROR AL CARGAR LA LISTA**********************\n\n\n");
 					}
 					break;
 				case 3:
@@ -166,7 +150,6 @@ int main()
 				case 8:
 					if(controller_saveAsText("data.csv", listaPasajeros)==0)
 					{
-						banderaGuardarDeDatosTxt=0;
 						printf("\n\n\n**********************LOS DATOS DE LA LISTA FUERON GUARDADOS CON EXITO**********************\n\n\n");
 					}
 					else if(controller_saveAsText("data.csv", listaPasajeros)==1)
@@ -181,7 +164,6 @@ int main()
 				case 9:
 					if(controller_saveAsBinary("data.bin", listaPasajeros)==0)
 					{
-						banderaGuardarDeDatosBin=0;
 						printf("\n\n\n**********************LOS DATOS DE LA LISTA FUERON GUARDADOS CON EXITO**********************\n\n\n");
 					}
 					else

@@ -113,7 +113,7 @@ int controller_addPassenger(LinkedList* pArrayListPassenger)
 		if(utn_getNombre(nombre, 50, "Ingrese el nombre del pasajero: ", "ERROR. NOMBRE INVALIDO. ", 3)==0 &&
 		   utn_getNombre(apellido, 50, "Ingrese el apellido del pasajero: ", "ERROR. APELLIDO INVALIDO. ", 3)==0 &&
 		   utn_getNumeroFlotante(&precio, "Ingrese el precio: ", "ERROR. PRECIO INVALIDO. ", 1, 3000000, 3)==0 &&
-		   utn_getFlyCode(codigoDeVuelo, 50, "Ingrese el codigo de vuelo: ", "ERROR. CODIGO DE VUELO INVALIDO. ", 3)==0 &&
+		   utn_getFlyCode(codigoDeVuelo, 50, "Ingrese el codigo de vuelo (XX0000X): ", "ERROR. CODIGO DE VUELO INVALIDO. ", 3)==0 &&
 		   utn_getNumeroEntero(&tipoPasajero, "Ingrese el tipo de pasajero: \n\t1-FirstClass\n\t2-Executive\n\t3-EconomyClass\n", "ERROR. TIPO DE PASAJERO INVALIDO. ", 1, 3, 3)==0 &&
 		   utn_getNumeroEntero(&estadoVuelo, "Ingrese el estado del vuelo: \n\t1-Aterrizado\n\t2-En Horario\n\t3-Demorado\n", "ERROR. ESTADO DE VUELO INVALIDO. ", 1, 3, 3)==0)
 		{

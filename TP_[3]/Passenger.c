@@ -417,7 +417,7 @@ int Passenger_modifyPassenger(Passenger* this, int index, int id, int opcion)
 				}
 				break;
 			case 4:
-				if (utn_getFlyCode(nuevoCodigoDeVuelo, 50, "Ingrese el nuevo codigo de vuelo: ", "ERROR. CODIGO DE VUELO INVALIDO. ", 3)==0)
+				if (utn_getFlyCode(nuevoCodigoDeVuelo, 50, "Ingrese el nuevo codigo de vuelo (XX0000X): ", "ERROR. CODIGO DE VUELO INVALIDO. ", 3)==0)
 				{
 					Passenger_setCodigoVuelo(this, nuevoCodigoDeVuelo);
 					retorno = 0;
